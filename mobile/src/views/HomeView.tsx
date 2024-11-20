@@ -1,15 +1,13 @@
 import { Fontisto } from "@expo/vector-icons"
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { colors } from "../colors"
-import { Header } from "../components"
-import { FindBar } from "../components/FindBar"
+import { FindBar, Header, Title } from "../components"
 import { HomeViewModel } from "../viewmodels"
 import { useEffect, useState } from "react"
 import { GetAll } from "../services/GetAll"
-import { ICategory } from "../interfaces/ICategory"
 
 export const HomeView = () => {
-    const { categories, setCategories} = HomeViewModel();
+    const { categories, setCategories, valor, toggleValor} = HomeViewModel();
 
     useEffect(() => {
         async function fetchData() {
@@ -22,9 +20,10 @@ export const HomeView = () => {
     return (
         <ScrollView style={styles.scroll}>
             <Header />
+            <Title />
             <FindBar />
             <View>
-                <Text>Categories</Text>
+                <Text style={styles.title}>Categories</Text>
                 <ScrollView 
                 style={styles.scrollHorizontal}
                 showsHorizontalScrollIndicator={false}
@@ -33,13 +32,14 @@ export const HomeView = () => {
                     {categories.map((item) => (
                         <TouchableOpacity 
                             key={item.id}
-                            style={styles.touch}
+                            style={valor === item.id ? styles.touch : styles.touch2}
+                            onPress={() => toggleValor(item.id)}
                         >
                             <Image 
                                 source={{ uri: item.image }} 
                                 style={styles.img}
                             />
-                            <Text style={styles.txt}>{item.name}</Text>
+                            <Text style={valor === item.id ? styles.txt : styles.txt2}>{item.name}</Text>
                         </TouchableOpacity>
                     ))}
                 </ScrollView>
@@ -50,9 +50,9 @@ export const HomeView = () => {
 
 const styles = StyleSheet.create({
     scroll: {
-        paddingTop: 60,
-        paddingHorizontal: 20,
-        backgroundColor: colors.white
+        paddingTop: 70,
+        paddingHorizontal: 15,
+        backgroundColor: colors.white,
     },
     scrollHorizontal: {
         
@@ -67,6 +67,11 @@ const styles = StyleSheet.create({
         height: 30,
         resizeMode: 'contain'
     },
+    title: {
+        fontSize: 22,
+        paddingBottom: 10,
+        fontWeight: '500'
+    },
     touch: {
         flexDirection: 'row',
         justifyContent: 'center',
@@ -76,5 +81,22 @@ const styles = StyleSheet.create({
         padding: 10,
         marginRight: 10,
         borderRadius: 10
-    }
+    },
+    touch2: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.white,
+        gap: 10,
+        padding: 10,
+        marginRight: 10,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: colors.orange
+    },
+    txt2: {
+        fontSize: 20,
+        color: colors.black,
+        fontWeight: '700'
+    },
 })

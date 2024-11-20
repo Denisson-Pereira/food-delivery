@@ -65,5 +65,5 @@ const styles = StyleSheet.create({
     txt: {
         color: colors.grey,
         fontSize: 20
-    }
+    },
 });
