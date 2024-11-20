@@ -1,4 +1,4 @@
 export * from './CartView'
-export * from './ExitView'
+export * from './FavoritiesView'
 export * from './HomeView'
 export * from './InitialView'

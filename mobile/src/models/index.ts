@@ -1,4 +1,4 @@
 export * from './CartModel'
-export * from './ExitModel'
+export * from './FavoritiesModel'
 export * from './HomeModel'
 export * from './InitialModel'
