@@ -5,17 +5,20 @@ import { FindBar, Header, Title } from "../components"
 import { HomeViewModel } from "../viewmodels"
 import { useEffect, useState } from "react"
 import { GetAll } from "../services/GetAll"
+import { IProducts } from "../interfaces/IProducts"
 
 export const HomeView = () => {
-    const { categories, setCategories, valor, toggleValor} = HomeViewModel();
+    const { categories, setCategories, valor, toggleValor, products, setProducts, filteredProducts } = HomeViewModel();
 
     useEffect(() => {
         async function fetchData() {
-            const response = await GetAll('categories');
-            setCategories(response);
+            const responseCategory = await GetAll('categories');
+            const responseProducts = await GetAll('products');
+            setCategories(responseCategory);
+            setProducts(responseProducts);
         }
         fetchData();
-    }, [])
+    }, []);
 
     return (
         <ScrollView style={styles.scroll}>
@@ -24,25 +27,30 @@ export const HomeView = () => {
             <FindBar />
             <View>
                 <Text style={styles.title}>Categories</Text>
-                <ScrollView 
-                style={styles.scrollHorizontal}
-                showsHorizontalScrollIndicator={false}
-                horizontal={true}
+                <ScrollView
+                    style={styles.scrollHorizontal}
+                    showsHorizontalScrollIndicator={false}
+                    horizontal={true}
                 >
                     {categories.map((item) => (
-                        <TouchableOpacity 
+                        <TouchableOpacity
                             key={item.id}
                             style={valor === item.id ? styles.touch : styles.touch2}
                             onPress={() => toggleValor(item.id)}
                         >
-                            <Image 
-                                source={{ uri: item.image }} 
+                            <Image
+                                source={{ uri: item.image }}
                                 style={styles.img}
                             />
                             <Text style={valor === item.id ? styles.txt : styles.txt2}>{item.name}</Text>
                         </TouchableOpacity>
                     ))}
                 </ScrollView>
+            </View>
+            <View>
+                {filteredProducts.map((item) => (
+                    <Text key={item.id}>{item.name}</Text>
+                ))}
             </View>
         </ScrollView>
     )
@@ -55,7 +63,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
     },
     scrollHorizontal: {
-        
+
     },
     txt: {
         fontSize: 20,
