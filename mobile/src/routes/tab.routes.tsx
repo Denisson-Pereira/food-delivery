@@ -1,7 +1,8 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { CartView, FavoritiesView, HomeView } from "../views"; 
-import { Feather, SimpleLineIcons, FontAwesome } from "@expo/vector-icons";
+import { Feather, SimpleLineIcons, FontAwesome, Entypo, FontAwesome5 } from "@expo/vector-icons";
 import { StyleSheet, Text, View } from "react-native";
+import { colors } from "../colors";
 
 const Tab = createBottomTabNavigator();
 
@@ -11,8 +12,8 @@ export const TabRoutes = () => {
             screenOptions={({ route }) => ({
                 headerShown: false,
                 tabBarShowLabel: true,
-                tabBarActiveTintColor: "#FE724C",
-                tabBarInactiveTintColor: "#D3D1D8", 
+                tabBarActiveTintColor: colors.orange,
+                tabBarInactiveTintColor: colors.grey, 
                 tabBarStyle: {
                     height: 110,
                     justifyContent: 'center',
@@ -34,7 +35,7 @@ export const TabRoutes = () => {
                     tabBarIcon: ({ color, size, focused }) => (
                         <View style={{ alignItems: "center" }}>
                             {focused && <View style={styles.activeBar} />}
-                            <Feather name="home" color={color} size={size} />
+                            <Entypo name="home" color={color} size={size} />
                         </View>
                     ),
                     tabBarLabel: ({ focused }) => (
@@ -42,7 +43,7 @@ export const TabRoutes = () => {
                             style={{
                                 fontSize: 12,
                                 fontWeight: focused ? "bold" : "normal",
-                                color: focused ? "#FE724C" : "#D3D1D8",
+                                color: focused ? colors.orange : colors.grey,
                             }}
                         >
                             Home
@@ -58,7 +59,7 @@ export const TabRoutes = () => {
                     tabBarIcon: ({ color, size, focused }) => (
                         <View style={{ alignItems: "center" }}>
                             {focused && <View style={styles.activeBar} />} 
-                            <SimpleLineIcons name="list" color={color} size={size} />
+                            <FontAwesome5 name="shopping-bag" color={color} size={size} />
                         </View>
                     ),
                     tabBarLabel: ({ focused }) => (
@@ -66,7 +67,7 @@ export const TabRoutes = () => {
                             style={{
                                 fontSize: 12,
                                 fontWeight: focused ? "bold" : "normal",
-                                color: focused ? "#FE724C" : "#D3D1D8",
+                                color: focused ? colors.orange : colors.grey,
                             }}
                         >
                             Cart
@@ -90,7 +91,7 @@ export const TabRoutes = () => {
                             style={{
                                 fontSize: 12,
                                 fontWeight: focused ? "bold" : "normal",
-                                color: focused ? "#FE724C" : "#D3D1D8",
+                                color: focused ? colors.orange : colors.grey,
                             }}
                         >
                             Favorites
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
     activeBar: {
         height: 8,
         width: 40,
-        backgroundColor: "#FE724C", 
+        backgroundColor: colors.orange, 
         borderBottomEndRadius: 20,
         borderBottomStartRadius: 20,
         position: "absolute",
