@@ -1,8 +1,11 @@
 import React from "react";
 import { Dimensions, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { colors } from "../colors";
+import { InitialViewModel } from "../viewmodels";
 
 export const InitialView = () => {
+    const { skip } = InitialViewModel();
+
     return (
         <ImageBackground
             style={styles.bg}
@@ -19,7 +22,7 @@ export const InitialView = () => {
                         source={require('../assets/btn.png')}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={skip}>
                     <Text style={styles.txt}>Skip</Text>
                 </TouchableOpacity>
             </View>
