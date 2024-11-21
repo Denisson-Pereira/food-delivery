@@ -1,12 +1,17 @@
 import { useEffect } from "react";
 import { DetailsProductsViewModel } from "../viewmodels/DetailsProductsViewModel"
 import { GetById } from "../services/GetById";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors } from "../colors";
 import { Entypo } from "@expo/vector-icons";
+import { useFoodContext } from "../context";
+import { IProducts } from "../interfaces/IProducts";
+import { useNavigate } from "../hooks/useNavigate";
 
 export const DetailsProductsView = () => {
     const { id, product, setProduct } = DetailsProductsViewModel();
+    const { addCart } = useFoodContext();
+    const { navigate } = useNavigate();
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -19,6 +24,19 @@ export const DetailsProductsView = () => {
         };
         fetchProduct();
     }, [id])
+
+    const addBag = (item: IProducts) => {
+        addCart(item)
+        navigate('home')
+        Alert.alert(
+          'Success',
+          'Product added to cart!',
+          [
+            {text: 'Continue shopping'}
+          ]
+        )
+      }
+
     return (
         <View style={styles.view}>
             {product ? (
@@ -42,9 +60,6 @@ export const DetailsProductsView = () => {
                                     <Text style={styles.txtprice2}>{product.price}.</Text>
                                     <Text style={styles.txtprice3}>00</Text>
                                 </View>
-                                <View>
-                                    <Text>Quantidade</Text>
-                                </View>
                             </View>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <View style={styles.box}>
@@ -65,7 +80,10 @@ export const DetailsProductsView = () => {
                                 <Text style={{ fontSize: 16, fontWeight: '400' }}>{product.about}.</Text>
                             </View>
                             <View style={styles.viewBtn}>
-                                <TouchableOpacity style={styles.btn}>
+                                <TouchableOpacity 
+                                    style={styles.btn}
+                                    onPress={() => addBag(product)}
+                                >
                                     <Text style={styles.txtBtn}>Add to Cart</Text>
                                 </TouchableOpacity>
                             </View>
@@ -103,19 +121,20 @@ const styles = StyleSheet.create({
     },
     price: {
         flexDirection: 'row',
-        alignItems: 'flex-end'
+        alignItems: 'center'
     },
     txtprice1: {
-        fontSize: 18,
+        fontSize: 30,
         fontWeight: '700',
         color: colors.orange
     },
     txtprice2: {
-        fontSize: 18,
+        fontSize: 25,
         fontWeight: '700',
         color: colors.orange
     },
     txtprice3: {
+        fontSize: 25,
         fontWeight: '500',
         color: colors.orange
     },
