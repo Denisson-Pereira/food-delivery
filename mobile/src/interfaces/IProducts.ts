@@ -7,4 +7,7 @@ export interface IProducts {
     category: string
     evaluation: string
     about: string
+    size: string
+    energy: string
+    delivery: string
 }
