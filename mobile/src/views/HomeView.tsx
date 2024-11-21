@@ -5,7 +5,6 @@ import { FindBar, Header, Title } from "../components"
 import { HomeViewModel } from "../viewmodels"
 import { useEffect, useState } from "react"
 import { GetAll } from "../services/GetAll"
-import { IProducts } from "../interfaces/IProducts"
 
 export const HomeView = () => {
     const { categories, setCategories, valor, toggleValor, products, setProducts, filteredProducts } = HomeViewModel();
