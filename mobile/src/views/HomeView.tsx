@@ -20,7 +20,10 @@ export const HomeView = () => {
     }, []);
 
     return (
-        <ScrollView style={styles.scroll}>
+        <ScrollView 
+            style={styles.scroll}
+            showsVerticalScrollIndicator={false}
+        >
             <Header />
             <Title />
             <FindBar />
@@ -153,9 +156,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
-        padding: 10,
         gap: 10,
-        marginTop: 10,
+        marginTop: 15,
         marginBottom: 150
     },
     image: {
