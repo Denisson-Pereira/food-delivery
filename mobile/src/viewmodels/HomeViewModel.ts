@@ -17,6 +17,8 @@ export const HomeViewModel = (): HomeModel => {
         if (valor === 1) return item.category === 'Burger';
         if (valor === 2) return item.category === 'Pizza';
         if (valor === 3) return item.category === 'Sandwich';
+        if (valor === 4) return item.category === 'Natural';
+        if (valor === 5) return item.category === 'Fruits';
         return false;
     });
 

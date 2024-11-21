@@ -5,9 +5,11 @@ import { FindBar, Header, Title } from "../components"
 import { HomeViewModel } from "../viewmodels"
 import { useEffect, useState } from "react"
 import { GetAll } from "../services/GetAll"
+import { useNavigate } from "../hooks/useNavigate"
 
 export const HomeView = () => {
     const { categories, setCategories, valor, toggleValor, products, setProducts, filteredProducts } = HomeViewModel();
+    const { navigate } = useNavigate();
 
     useEffect(() => {
         async function fetchData() {
@@ -53,7 +55,8 @@ export const HomeView = () => {
                 {filteredProducts.map((item) => (
                     <TouchableOpacity 
                         key={item.id}
-                        style={styles.container}    
+                        style={styles.container}  
+                        onPress={() => navigate('ProductsDetails', { id: item.id })}  
                     >
                         <View style={styles.star}>
                             <Entypo name="star" size={20} color={colors.yellow} />
