@@ -3,7 +3,7 @@ import { DetailsProductsViewModel } from "../viewmodels/DetailsProductsViewModel
 import { GetById } from "../services/GetById";
 import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors } from "../colors";
-import { Entypo } from "@expo/vector-icons";
+import { AntDesign, Entypo } from "@expo/vector-icons";
 import { useFoodContext } from "../context";
 import { IProducts } from "../interfaces/IProducts";
 import { useNavigate } from "../hooks/useNavigate";
@@ -11,7 +11,7 @@ import { pattersValues } from "../helpers/pattersValues";
 
 export const DetailsProductsView = () => {
     const { id, product, setProduct } = DetailsProductsViewModel();
-    const { addCart } = useFoodContext();
+    const { addCart, favorites, toggleFavorite } = useFoodContext();
     const { navigate } = useNavigate();
 
     useEffect(() => {
@@ -30,11 +30,11 @@ export const DetailsProductsView = () => {
         addCart(item)
         navigate('home')
         Alert.alert(
-          'Success',
-          'Product added to cart!',
-          [
-            {text: 'Continue shopping'}
-          ]
+            'Success',
+            'Product added to cart!',
+            [
+                { text: 'Continue shopping' }
+            ]
         )
     }
 
@@ -43,6 +43,9 @@ export const DetailsProductsView = () => {
             {product ? (
                 <>
                     <View style={styles.container}>
+                        <TouchableOpacity style={styles.favorite} onPress={() => toggleFavorite(product)}>
+                            <AntDesign name={favorites.some(fav => fav.id === product.id) ? 'heart' : 'hearto'} color={favorites.some(fav => fav.id === product.id) ? 'red' : colors.grey} size={30} />
+                        </TouchableOpacity>
                         <View style={styles.img}>
                             <Image source={{ uri: product.image }} style={{ width: 300, height: 300, resizeMode: 'contain' }} />
                         </View>
@@ -80,7 +83,7 @@ export const DetailsProductsView = () => {
                                 <Text style={{ fontSize: 16, fontWeight: '400' }}>{product.about}.</Text>
                             </View>
                             <View style={styles.viewBtn}>
-                                <TouchableOpacity 
+                                <TouchableOpacity
                                     style={styles.btn}
                                     onPress={() => addBag(product)}
                                 >
@@ -175,5 +178,16 @@ const styles = StyleSheet.create({
         fontSize: 25,
         fontWeight: '600',
         color: colors.white
-    }
+    },
+    favorite: {
+        position: 'absolute',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        top: 10,
+        right: 10,
+        backgroundColor: '#ffffff5e',
+        padding: 5,
+        borderRadius: 50,
+    },
 })

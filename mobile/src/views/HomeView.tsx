@@ -13,17 +13,17 @@ import { IProducts } from "../interfaces/IProducts"
 export const HomeView = () => {
     const { categories, setCategories, valor, toggleValor, products, setProducts, filteredProducts } = HomeViewModel();
     const { navigate } = useNavigate();
-    const {addCart} = useFoodContext();
+    const { addCart, favorites, toggleFavorite } = useFoodContext();
 
     const addBag = (item: IProducts) => {
         addCart(item)
         navigate('home')
         Alert.alert(
-          'Success',
-          'Product added to cart!',
-          [
-            {text: 'Continue shopping'}
-          ]
+            'Success',
+            'Product added to cart!',
+            [
+                { text: 'Continue shopping' }
+            ]
         )
     }
 
@@ -38,7 +38,7 @@ export const HomeView = () => {
     }, []);
 
     return (
-        <ScrollView 
+        <ScrollView
             style={styles.scroll}
             showsVerticalScrollIndicator={false}
         >
@@ -69,14 +69,21 @@ export const HomeView = () => {
             </View>
             <View style={styles.grid}>
                 {filteredProducts.map((item) => (
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         key={item.id}
-                        style={styles.container}  
-                        onPress={() => navigate('ProductsDetails', { id: item.id })}  
+                        style={styles.container}
+                        onPress={() => navigate('ProductsDetails', { id: item.id })}
                     >
-                        <View style={styles.star}>
-                            <Entypo name="star" size={20} color={colors.yellow} />
-                            <Text>{item.evaluation}</Text>
+                        <View style={styles.containerStarFavorite}>
+                            <View style={styles.star}>
+                                <Entypo name="star" size={20} color={colors.yellow} />
+                                <Text>{item.evaluation}</Text>
+                            </View>
+                            <View style={styles.containerFavorite}>
+                                <TouchableOpacity style={styles.favorite} onPress={() => toggleFavorite(item)}>
+                                    <AntDesign name={favorites.some(fav => fav.id === item.id) ? 'heart' : 'hearto'} color={favorites.some(fav => fav.id === item.id) ? 'red' : colors.grey} size={30} />
+                                </TouchableOpacity>
+                            </View>
                         </View>
                         <View style={styles.image}>
                             <Image
@@ -91,7 +98,7 @@ export const HomeView = () => {
                                 <Text style={styles.txtprice1}>$ </Text>
                                 <Text style={styles.txtprice2}>{pattersValues(item.price)}</Text>
                             </View>
-                            <TouchableOpacity 
+                            <TouchableOpacity
                                 style={styles.plus}
                                 onPress={() => addBag(item)}
                             >
@@ -204,7 +211,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
-        
+
     },
     price: {
         flexDirection: 'row',
@@ -220,4 +227,15 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         color: colors.orange
     },
+    containerStarFavorite: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    containerFavorite: {
+
+    },
+    favorite: {
+        backgroundColor: '#ffffff5e',
+    }
 })
