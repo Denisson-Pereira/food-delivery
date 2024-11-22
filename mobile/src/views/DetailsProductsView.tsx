@@ -7,6 +7,7 @@ import { Entypo } from "@expo/vector-icons";
 import { useFoodContext } from "../context";
 import { IProducts } from "../interfaces/IProducts";
 import { useNavigate } from "../hooks/useNavigate";
+import { pattersValues } from "../helpers/pattersValues";
 
 export const DetailsProductsView = () => {
     const { id, product, setProduct } = DetailsProductsViewModel();
@@ -35,7 +36,7 @@ export const DetailsProductsView = () => {
             {text: 'Continue shopping'}
           ]
         )
-      }
+    }
 
     return (
         <View style={styles.view}>
@@ -57,8 +58,7 @@ export const DetailsProductsView = () => {
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <View style={styles.price}>
                                     <Text style={styles.txtprice1}>$ </Text>
-                                    <Text style={styles.txtprice2}>{product.price}.</Text>
-                                    <Text style={styles.txtprice3}>00</Text>
+                                    <Text style={styles.txtprice2}>{pattersValues(product.price)}</Text>
                                 </View>
                             </View>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -131,11 +131,6 @@ const styles = StyleSheet.create({
     txtprice2: {
         fontSize: 25,
         fontWeight: '700',
-        color: colors.orange
-    },
-    txtprice3: {
-        fontSize: 25,
-        fontWeight: '500',
         color: colors.orange
     },
     name: {

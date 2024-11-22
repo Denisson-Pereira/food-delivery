@@ -1,15 +1,31 @@
 import { AntDesign, Entypo, Fontisto } from "@expo/vector-icons"
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { Alert, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { colors } from "../colors"
 import { FindBar, Header, Title } from "../components"
 import { HomeViewModel } from "../viewmodels"
 import { useEffect, useState } from "react"
 import { GetAll } from "../services/GetAll"
 import { useNavigate } from "../hooks/useNavigate"
+import { pattersValues } from "../helpers/pattersValues"
+import { useFoodContext } from "../context"
+import { IProducts } from "../interfaces/IProducts"
 
 export const HomeView = () => {
     const { categories, setCategories, valor, toggleValor, products, setProducts, filteredProducts } = HomeViewModel();
     const { navigate } = useNavigate();
+    const {addCart} = useFoodContext();
+
+    const addBag = (item: IProducts) => {
+        addCart(item)
+        navigate('home')
+        Alert.alert(
+          'Success',
+          'Product added to cart!',
+          [
+            {text: 'Continue shopping'}
+          ]
+        )
+    }
 
     useEffect(() => {
         async function fetchData() {
@@ -73,10 +89,12 @@ export const HomeView = () => {
                         <View style={styles.containerPrice}>
                             <View style={styles.price}>
                                 <Text style={styles.txtprice1}>$ </Text>
-                                <Text style={styles.txtprice2}>{item.price}.</Text>
-                                <Text style={styles.txtprice3}>00</Text>
+                                <Text style={styles.txtprice2}>{pattersValues(item.price)}</Text>
                             </View>
-                            <TouchableOpacity style={styles.plus}>
+                            <TouchableOpacity 
+                                style={styles.plus}
+                                onPress={() => addBag(item)}
+                            >
                                 <AntDesign name="plus" size={20} color={colors.white} />
                             </TouchableOpacity>
                         </View>
@@ -200,10 +218,6 @@ const styles = StyleSheet.create({
     txtprice2: {
         fontSize: 18,
         fontWeight: '700',
-        color: colors.orange
-    },
-    txtprice3: {
-        fontWeight: '500',
         color: colors.orange
     },
 })
