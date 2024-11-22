@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     },
     emptyText: {
         fontSize: 18,
-        color: colors.black,
+        color: colors.grey,
         textAlign: 'center',
     },
 });
