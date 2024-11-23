@@ -75,7 +75,7 @@ O banco de dados `fooddelivery` contém duas tabelas: `category` e `product`.
 | Campo   | Tipo         | Descrição                               |
 |---------|--------------|-----------------------------------------|
 | id      | int       | Identificador único da categoria        |
-| name    | varchar(255) | Nome da categoria                       |
+| name    | varchar(30) | Nome da categoria                       |
 | image   | varchar(255) | URL da imagem da categoria              |
 
 
@@ -84,12 +84,12 @@ O banco de dados `fooddelivery` contém duas tabelas: `category` e `product`.
 | Campo          | Tipo         | Descrição                          |
 |----------------|--------------|------------------------------------|
 | id             | int       | Identificador único do produto      |
-| name           | varchar(255) | Nome do produto                    |
+| name           | varchar(30) | Nome do produto                    |
 | image          | varchar(255) | URL da imagem do produto           |
 | description    | varchar(255) | Descrição do produto               |
-| price          | varchar(255) | Preço do produto                   |
-| category       | varchar(255) | Categoria do produto               |
-| evaluation     | varchar(255) | Avaliação do produto               |
+| price          | varchar(10) | Preço do produto                   |
+| category       | varchar(20) | Categoria do produto               |
+| evaluation     | varchar(10) | Avaliação do produto               |
 | about   | varchar(255) | Outra descrição do produto |
 | size   | varchar(20) | Tamanho do produto |
 | energy   | varchar(20) | Calorias do produto |
