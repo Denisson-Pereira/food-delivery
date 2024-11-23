@@ -171,7 +171,7 @@ Esse comando é usado para iniciar um projeto desenvolvido com Expo.
 
 ![Web 2](./github/expo.gif) 
 
-Lembre-se de que os dados do banco estão localizados, a partir da raiz do projeto, em `database/Dump20241113.sql`.
+Lembre-se de que os dados do banco estão localizados, a partir da raiz do projeto, em `database/Dump20241123.sql`.
 
 # 📸 Visuals and Screenshots
 
