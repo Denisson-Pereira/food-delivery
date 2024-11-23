@@ -189,7 +189,7 @@ Dê uma espiada no nosso projeto em funcionamento e esclareça todas as suas dú
 
 ## 💻 Software em Ação
 
-![Mob 1](./github/action.gif) 
+<img src="./github/action.gif" alt="Mob 1" width="300" />
 
 
 # 📺 Edição
