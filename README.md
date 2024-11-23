@@ -178,12 +178,12 @@ Lembre-se de que os dados do banco estão localizados, a partir da raiz do proje
 Dê uma espiada no nosso projeto em funcionamento e esclareça todas as suas dúvidas sobre como executá-lo!
 
 <div style="display: flex; gap: 10px;">
-    <img src="./github/img0.jpeg" alt="Mob 1" style="width: 30%;">
-    <img src="./github/img1.jpeg" alt="Mob 2" style="width: 30%;">
-    <img src="./github/img2.jpeg" alt="Mob 3" style="width: 30%;">
-    <img src="./github/img3.jpeg" alt="Mob 4" style="width: 30%;">
-    <img src="./github/img4.jpeg" alt="Mob 5" style="width: 30%;">
-    <img src="./github/img5.jpeg" alt="Mob 6" style="width: 30%;">
+    <img src="./github/img1.png" alt="Mob 1" style="width: 30%;">
+    <img src="./github/img2.png" alt="Mob 1" style="width: 30%;">
+    <img src="./github/img3.png" alt="Mob 1" style="width: 30%;">
+    <img src="./github/img4.png" alt="Mob 1" style="width: 30%;">
+    <img src="./github/img5.png" alt="Mob 1" style="width: 30%;">
+    <img src="./github/img6.png" alt="Mob 1" style="width: 30%;">
 </div>
 
 
